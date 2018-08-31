@@ -1,11 +1,11 @@
 package com.example.android.scouting;
 
-public class ScoutResponses {
-    public int tournament, match, team;
+public class ScoutResponse {
+    public int match, team;
     public boolean haveAuto;
-    public String otherNotes;
+    public String tournament, otherNotes;
 
-    ScoutResponses(int tournamentIn, int matchIn, int teamIn, boolean haveAutoIn, String otherNotesIn)
+    ScoutResponse(String tournamentIn, int matchIn, int teamIn, boolean haveAutoIn, String otherNotesIn)
     {
         tournament = tournamentIn;
         match=matchIn;

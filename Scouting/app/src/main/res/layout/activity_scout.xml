@@ -19,26 +19,31 @@
             android:orientation="vertical">
 
             <EditText
+                android:id="@+id/scout_tournament_et"
                 style="@style/Scout_Edit_Text"
                 android:hint="Tournament"
                 android:inputType="text" />
 
             <EditText
+                android:id="@+id/scout_match_et"
                 style="@style/Scout_Edit_Text"
                 android:hint="Match"
                 android:inputType="number" />
 
             <EditText
+                android:id="@+id/scout_team_et"
                 style="@style/Scout_Edit_Text"
                 android:hint="Team"
                 android:inputType="number" />
 
             <CheckBox
+                android:id="@+id/scout_auto_cb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Auto?" />
 
             <EditText
+                android:id="@+id/scout_notes_et"
                 style="@style/Scout_Edit_Text"
                 android:layout_height="@dimen/scout_notes_box_height"
                 android:hint="Other Notes"
