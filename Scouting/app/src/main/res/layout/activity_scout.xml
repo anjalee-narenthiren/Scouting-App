@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_margin"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".ScoutActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                style="@style/Scout_Edit_Text"
+                android:hint="Tournament"
+                android:inputType="text" />
+
+            <EditText
+                style="@style/Scout_Edit_Text"
+                android:hint="Match"
+                android:inputType="number" />
+
+            <EditText
+                style="@style/Scout_Edit_Text"
+                android:hint="Team"
+                android:inputType="number" />
+
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Auto?" />
+
+            <EditText
+                style="@style/Scout_Edit_Text"
+                android:layout_height="@dimen/scout_notes_box_height"
+                android:hint="Other Notes"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/scout_submit_bttn"
+                android:text="Submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
+

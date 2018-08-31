@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+    <!-- General Layout Constants -->
+    <dimen name="activity_margin">16dp</dimen>
+
+    <!-- MenuActivity Layout Constants -->
+    <dimen name="menu_button_size">40sp</dimen>
+
+    <!-- ScoutActivity Layout Constants -->
+    <dimen name="scout_size_et">20sp</dimen>
+    <dimen name="scout_margin">16dp</dimen>
+    <dimen name="scout_notes_box_height">128dp</dimen>
+</resources>
