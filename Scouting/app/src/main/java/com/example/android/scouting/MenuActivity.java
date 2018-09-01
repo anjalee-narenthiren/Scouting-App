@@ -28,6 +28,17 @@ public class MenuActivity extends AppCompatActivity {
                 }
             }
         );
+
+        Button view_data_bttn = findViewById(R.id.view_data_bttn);
+        view_data_bttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Log.v("MenuActivity", "Btn Pressed - Enter ViewDataActivity");
+                Intent openViewDataActivity = new Intent(MenuActivity.this, ViewDataActivity.class);
+                startActivity(openViewDataActivity);
+            }
+        });
     }
 
 

@@ -24,4 +24,11 @@
         <item name="android:layout_marginBottom">@dimen/scout_margin</item>
     </style>
 
+    <style name="Column_View">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/col_size_et</item>
+        <item name="android:layout_marginBottom">@dimen/col_margin</item>
+    </style>
+
 </resources>
