@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class HorMatchAdapter extends ArrayAdapter<ScoutResponse> {
+public class HorMatchAdapter extends ArrayAdapter<MatchInfo> {
 
-    public HorMatchAdapter(Context context, ArrayList<ScoutResponse> arrayList)
+    public HorMatchAdapter(Context context, ArrayList<MatchInfo> arrayList)
     {
         super(context, R.layout.match_column, arrayList);
     }
@@ -24,7 +24,7 @@ public class HorMatchAdapter extends ArrayAdapter<ScoutResponse> {
         if (returnView == null)
             returnView = LayoutInflater.from(getContext()).inflate(R.layout.match_column, parent, false);
 
-        ScoutResponse curMatch = getItem(position);
+        MatchInfo curMatch = getItem(position);
 
         TextView match = (TextView)returnView.findViewById(R.id.col_match_tv);
         match.setText(curMatch.match);

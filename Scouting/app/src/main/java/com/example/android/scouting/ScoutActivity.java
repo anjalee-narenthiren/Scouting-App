@@ -12,12 +12,16 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import static java.lang.Integer.parseInt;
 
 public class ScoutActivity extends AppCompatActivity {
-    public static ArrayList<ScoutResponse> gScoutResponses = new ArrayList<ScoutResponse>(10);
+    public static ArrayList<MatchInfo> matchInfoList = new ArrayList<MatchInfo>(10);
+    public static final SimpleDateFormat MONTH_DAY_FORMAT = new SimpleDateFormat("MM-dd");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +30,7 @@ public class ScoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scout);
 
         //Initialize Variables
-        EditText tournament = findViewById(R.id.scout_tournament_et);
+        //EditText tournament = findViewById(R.id.scout_tournament_et);
         EditText match = findViewById(R.id.scout_match_et);
         EditText team = findViewById(R.id.scout_team_et);
         CheckBox autoCB = findViewById(R.id.scout_auto_cb);
@@ -40,17 +44,18 @@ public class ScoutActivity extends AppCompatActivity {
                 if( isEmpty(R.id.scout_match_et) || isEmpty(R.id.scout_team_et) ) {
                     Toast.makeText(ScoutActivity.this, "Enter match & team number", Toast.LENGTH_SHORT).show();
                 } else {
+                    Calendar calendar = Calendar.getInstance();
+                    String tournament = MONTH_DAY_FORMAT.format(calendar.getTime());
                     int match = ETToInt(R.id.scout_match_et);
-                    String tournament = ETToString(R.id.scout_tournament_et);
                     int team = ETToInt(R.id.scout_team_et);
                     boolean haveAuto = ((CheckBox)findViewById(R.id.scout_auto_cb)).isChecked();
                     String notes = ETToString(R.id.scout_notes_et);
 
-                    gScoutResponses.add(new ScoutResponse(tournament, match, team, haveAuto, notes));
-                    ScoutResponse lstResponse = gScoutResponses.get(gScoutResponses.size()-1);
+                    matchInfoList.add(new MatchInfo(tournament, match, team, haveAuto, notes));
+                    MatchInfo lstResponse = matchInfoList.get(matchInfoList.size()-1);
                     Log.v("ScoutActivity", "Submitted Data. Match:"+lstResponse.match+" Team: "+lstResponse.team);
-                    Intent submitScoutResponses = new Intent(ScoutActivity.this, MenuActivity.class);
-                    startActivity(submitScoutResponses);
+                    Intent submitMatchInfos = new Intent(ScoutActivity.this, MenuActivity.class);
+                    startActivity(submitMatchInfos);
 
                     Toast.makeText(ScoutActivity.this, "Successful Submit- Match:"+lstResponse.match+" Team: "+lstResponse.team, Toast.LENGTH_SHORT).show();
                 }
