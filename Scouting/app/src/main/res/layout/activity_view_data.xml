@@ -2,6 +2,11 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/scout_match_et"
+        style="@style/Scout_Edit_Text"
+        android:hint="Match"
+        android:inputType="number" />
 
     <com.kelin.scrollablepanel.library.ScrollablePanel
         android:id="@+id/scrollable_panel"

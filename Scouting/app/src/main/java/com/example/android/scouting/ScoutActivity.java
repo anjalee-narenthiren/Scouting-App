@@ -1,6 +1,7 @@
 package com.example.android.scouting;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,14 +14,19 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import static com.example.android.scouting.MenuActivity.SHARED_PREFS_KEY;
+import static com.example.android.scouting.MenuActivity.matchInfoList;
+
 import static java.lang.Integer.parseInt;
 
 public class ScoutActivity extends AppCompatActivity {
-    public static ArrayList<MatchInfo> matchInfoList = new ArrayList<MatchInfo>(10);
+    //public static ArrayList<MatchInfo> matchInfoList = new ArrayList<MatchInfo>(10);
     public static final SimpleDateFormat MONTH_DAY_FORMAT = new SimpleDateFormat("MM-dd");
 
     @Override
@@ -57,11 +63,22 @@ public class ScoutActivity extends AppCompatActivity {
                     Intent submitMatchInfos = new Intent(ScoutActivity.this, MenuActivity.class);
                     startActivity(submitMatchInfos);
 
+                    saveData(); //save matchInfoList to shared preferences
+
                     Toast.makeText(ScoutActivity.this, "Successful Submit- Match:"+lstResponse.match+" Team: "+lstResponse.team, Toast.LENGTH_SHORT).show();
                 }
             }
         }
         );
+    }
+
+    public void saveData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(matchInfoList);
+        editor.putString(SHARED_PREFS_KEY, json);
+        editor.apply();
     }
 
     private boolean isEmpty(int id)

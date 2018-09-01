@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static com.example.android.scouting.ScoutActivity.matchInfoList;
+import static com.example.android.scouting.MenuActivity.matchInfoList;
 
 public class ViewDataActivity extends AppCompatActivity {
 
