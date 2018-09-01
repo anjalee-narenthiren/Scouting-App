@@ -30,7 +30,7 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     @Override
     public int getRowCount() {
-        return descriptionInfoList.size() + 1;
+        return descriptionInfoList.size();//  + 1;
     }
 
     @Override
@@ -56,9 +56,10 @@ public class ScrollablePanelAdapter extends PanelAdapter {
     }
 
     public int getItemViewType(int row, int column) {
-        if (column == 0 && row == 0) {
+
+        /*if (column == 0 && row == 0) {
             return TITLE_TYPE;
-        }
+        }*/
         if (column == 0) {
             return DESCRIPTION_TYPE;
         }
@@ -86,8 +87,8 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
     private void setDescriptionView(int pos, DescriptionViewHolder viewHolder) {
         String descriptionInfo = descriptionInfoList.get(pos);
-        if (descriptionInfo != null && pos > 0) {
-            viewHolder.descriptionTypeTextView.setText(descriptionInfo);
+        if (descriptionInfo != null && pos >= 0) {
+            viewHolder.descriptionTextView.setText(descriptionInfo);
         }
     }
 
@@ -124,12 +125,14 @@ public class ScrollablePanelAdapter extends PanelAdapter {
 
 
     private static class DescriptionViewHolder extends RecyclerView.ViewHolder {
-        public TextView descriptionTypeTextView;
+        public ViewGroup descriptionViewGroup;
+        public TextView descriptionTextView;
         public TextView descriptionNameTextView;
 
         public DescriptionViewHolder(View view) {
             super(view);
-            this.descriptionTypeTextView = (TextView) view.findViewById(R.id.description_type);
+            this.descriptionViewGroup = (ViewGroup) view.findViewById(R.id.description_view_group);
+            this.descriptionTextView = (TextView) view.findViewById(R.id.description_type);
             this.descriptionNameTextView = (TextView) view.findViewById(R.id.description_name);
         }
     }

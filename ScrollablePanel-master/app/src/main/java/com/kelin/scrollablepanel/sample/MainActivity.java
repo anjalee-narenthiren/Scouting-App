@@ -31,12 +31,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void generateTestData(ScrollablePanelAdapter scrollablePanelAdapter) {
         List<String> descriptionInfoList = new ArrayList();
-        descriptionInfoList.add("team");
-        descriptionInfoList.add("match");
-        descriptionInfoList.add("a");
-        descriptionInfoList.add("b");
-        descriptionInfoList.add("auto");
-        descriptionInfoList.add("notes");
+        descriptionInfoList.add("Tournament");
+        descriptionInfoList.add("Match");
+        descriptionInfoList.add("Team");
+        descriptionInfoList.add("Auto");
+        descriptionInfoList.add("Notes");
         scrollablePanelAdapter.setDescriptionInfoList(descriptionInfoList);
 
         List<DateInfo> dateInfoList = new ArrayList<>();
