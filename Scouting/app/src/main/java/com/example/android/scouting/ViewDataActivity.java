@@ -24,7 +24,7 @@ import static com.example.android.scouting.MenuActivity.matchInfoFilteredList;
 import static com.example.android.scouting.SettingsActivity.teamFilter;
 import static com.example.android.scouting.SettingsActivity.tournamentFilter;
 
-public class ViewDataActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
+public class ViewDataActivity extends BaseActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,26 +39,6 @@ public class ViewDataActivity extends AppCompatActivity implements SharedPrefere
     protected void onDestroy() {
         super.onDestroy();
         PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
-    }
-
-    //Implement Menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_filter, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings)
-        {
-         Intent startSettingsActivity = new Intent(this, SettingsActivity.class);
-         startActivity(startSettingsActivity);
-         return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     //Implement onSharedPrefenceChangeListener

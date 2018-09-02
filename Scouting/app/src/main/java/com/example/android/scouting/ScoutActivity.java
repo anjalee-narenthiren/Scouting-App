@@ -25,7 +25,7 @@ import static com.example.android.scouting.MenuActivity.matchInfoList;
 
 import static java.lang.Integer.parseInt;
 
-public class ScoutActivity extends AppCompatActivity {
+public class ScoutActivity extends BaseActivity {
     //public static ArrayList<MatchInfo> matchInfoList = new ArrayList<MatchInfo>(10);
     public static final SimpleDateFormat MONTH_DAY_FORMAT = new SimpleDateFormat("MM-dd");
 

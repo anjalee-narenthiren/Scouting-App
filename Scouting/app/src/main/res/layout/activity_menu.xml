@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:layout_margin="@dimen/activity_margin">
 
     <Button
         android:id="@+id/scout_bttn"
@@ -18,11 +19,13 @@
         android:layout_height="wrap_content"
         android:text="View Data"
         android:textSize="@dimen/menu_button_size" />
+    <!--
     <Button
         android:id="@+id/config_app_bttn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Config App"
         android:textSize="@dimen/menu_button_size" />
+        -->
 
 </LinearLayout>
