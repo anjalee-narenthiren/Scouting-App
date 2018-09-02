@@ -19,6 +19,7 @@
         android:title="Erase Local Scouting Data"
         android:key="erase_data"
         android:defaultValue="false"
+        android:summary="CAUTION!!! YOU DIE IF YOU PRESS THIS!"
         />
     <!-- //////////////////////////////////Search Filters////////////////////////////// -->
     <PreferenceCategory
