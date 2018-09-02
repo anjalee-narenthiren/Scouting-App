@@ -3,7 +3,7 @@
     android:id="@+id/description_view_group"
     android:layout_width="70dp"
     android:layout_height="50dp"
-    android:background="@drawable/bg_item"
+    android:background="@drawable/bg_item_description"
     android:gravity="center"
     android:orientation="vertical">
 
