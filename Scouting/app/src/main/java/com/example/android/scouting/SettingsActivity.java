@@ -14,10 +14,15 @@ import java.util.ArrayList;
 import static com.example.android.scouting.MenuActivity.SHARED_PREFS_KEY;
 import static com.example.android.scouting.MenuActivity.matchInfoList;
 
+
 public class SettingsActivity extends AppCompatActivity {
     public static String userName;
     public static String teamNum;
     public static boolean eraseData;
+
+    public static String teamFilter;
+    public static String tournamentFilter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +38,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        // When the home button is pressed, take the user back to the VisualizerActivity
+        // When the home button is pressed, take the user back to the PreviousActivity
         switch (item.getItemId()) {
             case android.R.id.home:
                 updateVariables();
@@ -49,7 +54,12 @@ public class SettingsActivity extends AppCompatActivity {
         userName = sharedPreferences.getString("user_name", "Aiden");
         teamNum = sharedPreferences.getString("team_num", "5225");
         eraseData = sharedPreferences.getBoolean("erase_data", false);
-        Log.v("SettingsActivity", "EraseData"+eraseData);
+
+        teamFilter = sharedPreferences.getString("team_filter", "").trim();
+        tournamentFilter = sharedPreferences.getString("tournament_filter", "").trim();
+
+        Log.v("SettingsActivity", "General Settings. User: "+userName+" Team: "+teamNum+" Erase Data? "+eraseData);
+        Log.v("SettingsActivity", "Filter Settings. teamFilter: "+teamFilter+" tournamentFilter: "+tournamentFilter);
         if (eraseData)
         {
             Log.v("SettingsActivity", "Erase Data");

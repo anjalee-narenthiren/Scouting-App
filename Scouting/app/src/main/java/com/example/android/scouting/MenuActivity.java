@@ -18,6 +18,7 @@ public class MenuActivity extends AppCompatActivity {
 
     public final static String SHARED_PREFS_KEY = "match list";
     public static ArrayList<MatchInfo> matchInfoList;
+    public static ArrayList<MatchInfo> matchInfoFilteredList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(openViewDataActivity);
             }
         });
+
     }
 
     public void loadData(){

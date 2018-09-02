@@ -1,6 +1,8 @@
 package com.example.android.scouting;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,21 +20,28 @@ import java.util.Calendar;
 import java.util.List;
 
 import static com.example.android.scouting.MenuActivity.matchInfoList;
+import static com.example.android.scouting.MenuActivity.matchInfoFilteredList;
+import static com.example.android.scouting.SettingsActivity.teamFilter;
+import static com.example.android.scouting.SettingsActivity.tournamentFilter;
 
-public class ViewDataActivity extends AppCompatActivity {
+public class ViewDataActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_data);
 
-        final ScrollablePanel scrollablePanel = (ScrollablePanel) findViewById(R.id.scrollable_panel);
-        //final TestPanelAdapter scrollablePanelAdapter = new TestPanelAdapter();
-        final ScrollablePanelAdapter scrollablePanelAdapter = new ScrollablePanelAdapter();
-        setData(scrollablePanelAdapter);
-        scrollablePanel.setPanelAdapter(scrollablePanelAdapter);
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
+
+        updateDataView();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    //Implement Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -52,6 +61,18 @@ public class ViewDataActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //Implement onSharedPrefenceChangeListener
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals("team_filter") || key.equals("tournament_filter")) {
+            Log.v("ViewDataActivity", "Preferences Changed - Update Data");
+            teamFilter = sharedPreferences.getString("team_filter", "").trim();
+            tournamentFilter = sharedPreferences.getString("tournament_filter", "").trim();
+            Log.v("ViewDataActivity", "Preferences Changed- teamFilter: "+teamFilter+" tournamentFilter: "+tournamentFilter);
+            updateDataView();
+        }
+    }
+
     private void setData(ScrollablePanelAdapter scrollablePanelAdapter) {
         List<String> descriptionInfoList = new ArrayList();
         descriptionInfoList.add("Tournament");
@@ -63,7 +84,20 @@ public class ViewDataActivity extends AppCompatActivity {
 
         Calendar calendar = Calendar.getInstance();
 
-        scrollablePanelAdapter.setMatchList(matchInfoList);
+        FilterMatchList filteredMatchList = new FilterMatchList(teamFilter, tournamentFilter, matchInfoList);
+        //boolean rand = teamFilter.isEmpty();
+        matchInfoFilteredList = filteredMatchList.filter();
+        scrollablePanelAdapter.setMatchList(matchInfoFilteredList);
+    }
+
+    public void updateDataView(){
+        setContentView(R.layout.activity_view_data);
+        
+        final ScrollablePanel scrollablePanel = (ScrollablePanel) findViewById(R.id.scrollable_panel);
+        //final TestPanelAdapter scrollablePanelAdapter = new TestPanelAdapter();
+        final ScrollablePanelAdapter scrollablePanelAdapter = new ScrollablePanelAdapter();
+        setData(scrollablePanelAdapter);
+        scrollablePanel.setPanelAdapter(scrollablePanelAdapter);
     }
 
 }

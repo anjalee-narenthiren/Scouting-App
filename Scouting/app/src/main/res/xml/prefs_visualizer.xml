@@ -29,12 +29,12 @@
     <EditTextPreference
         android:title="Team Filter"
         android:key="team_filter"
-        android:defaultValue="4659"
+        android:defaultValue=" "
         android:persistent="true" />
     <EditTextPreference
         android:title="Tournament Filter"
         android:key="tournament_filter"
-        android:defaultValue="01/01"
+        android:defaultValue=" "
         android:inputType="date"
         android:persistent="true" />
 
