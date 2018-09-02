@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="General Settings"
+        android:enabled="true" />
+    <EditTextPreference
+        android:title="Your Name"
+        android:key="user_name"
+        android:hint="John"
+        android:defaultValue="Aiden"
+        android:persistent="true" />
+    <EditTextPreference
+        android:title="Team Number"
+        android:key="team_num"
+        android:defaultValue="5225"
+        android:inputType="number"
+        android:persistent="true" />
+    <SwitchPreference
+        android:title="Erase Local Scouting Data"
+        android:key="erase_data"
+        android:defaultValue="false"
+        />
+    <!-- //////////////////////////////////Search Filters////////////////////////////// -->
+    <PreferenceCategory
+        android:title="Search Filters"
+        android:enabled="true"
+        android:summary="Filter the matches that are displayed on the View Data Screen"/>
+    <EditTextPreference
+        android:title="Team Filter"
+        android:key="team_filter"
+        android:defaultValue="4659"
+        android:persistent="true" />
+    <EditTextPreference
+        android:title="Tournament Filter"
+        android:key="tournament_filter"
+        android:defaultValue="01/01"
+        android:inputType="date"
+        android:persistent="true" />
+
+
+</PreferenceScreen>

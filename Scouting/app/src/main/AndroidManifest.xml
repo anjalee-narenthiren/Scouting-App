@@ -18,10 +18,12 @@
         </activity>
         <activity
             android:name=".ScoutActivity"
-            android:label="Scout a Match"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ViewDataActivity"
+            android:label="Scout a Match" />
+        <activity
+            android:name=".ViewDataActivity"
             android:label="View Data" />
+        <activity android:name=".SettingsActivity"
+            android:label="Settings"/>
     </application>
 
 </manifest>

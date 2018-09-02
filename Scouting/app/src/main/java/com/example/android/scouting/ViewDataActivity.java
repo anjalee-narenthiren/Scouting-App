@@ -1,8 +1,12 @@
 package com.example.android.scouting;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.GridView;
 import android.widget.ListView;
 
@@ -29,6 +33,25 @@ public class ViewDataActivity extends AppCompatActivity {
         scrollablePanel.setPanelAdapter(scrollablePanelAdapter);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_filter, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings)
+        {
+         Intent startSettingsActivity = new Intent(this, SettingsActivity.class);
+         startActivity(startSettingsActivity);
+         return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void setData(ScrollablePanelAdapter scrollablePanelAdapter) {
         List<String> descriptionInfoList = new ArrayList();
         descriptionInfoList.add("Tournament");
@@ -39,12 +62,7 @@ public class ViewDataActivity extends AppCompatActivity {
         scrollablePanelAdapter.setDescriptionInfoList(descriptionInfoList);
 
         Calendar calendar = Calendar.getInstance();
-        /*List<MatchInfo> matchInfoList = new ArrayList<>();
-        for (int i = 0; i < 14; i++) {
-            String date = MONTH_DAY_FORMAT.format(calendar.getTime());
-            matchInfoList.add(new MatchInfo(date, i, 2, true, "notes"));
-            Log.v("MatchInfo", "Add to matchInfoList match:" + matchInfoList.get(i).otherNotes);
-        }*/
+
         scrollablePanelAdapter.setMatchList(matchInfoList);
     }
 

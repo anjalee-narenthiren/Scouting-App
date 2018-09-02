@@ -15,6 +15,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class MenuActivity extends AppCompatActivity {
+
     public final static String SHARED_PREFS_KEY = "match list";
     public static ArrayList<MatchInfo> matchInfoList;
 
