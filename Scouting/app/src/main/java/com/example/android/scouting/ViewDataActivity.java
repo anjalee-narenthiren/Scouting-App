@@ -90,7 +90,7 @@ public class ViewDataActivity extends AppCompatActivity implements SharedPrefere
         scrollablePanelAdapter.setMatchList(matchInfoFilteredList);
     }
 
-    public void updateDataView(){
+    private void updateDataView(){
         setContentView(R.layout.activity_view_data);
         
         final ScrollablePanel scrollablePanel = (ScrollablePanel) findViewById(R.id.scrollable_panel);
