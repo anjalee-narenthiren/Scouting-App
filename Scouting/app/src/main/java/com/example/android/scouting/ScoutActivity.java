@@ -57,22 +57,25 @@ public class ScoutActivity extends BaseActivity {
                     boolean haveAuto = ((CheckBox)findViewById(R.id.scout_auto_cb)).isChecked();
                     String notes = ETToString(R.id.scout_notes_et);
 
-                    matchInfoList.add(new MatchInfo(tournament, match, team, haveAuto, notes));
-                    MatchInfo lstResponse = matchInfoList.get(matchInfoList.size()-1);
-                    Log.v("ScoutActivity", "Submitted Data. Match:"+lstResponse.match+" Team: "+lstResponse.team);
-                    Intent submitMatchInfos = new Intent(ScoutActivity.this, MenuActivity.class);
-                    startActivity(submitMatchInfos);
+                    MatchInfo newMatchInfo = new MatchInfo(tournament, match, team, haveAuto, notes);
+                    sMatchRef.push().setValue(newMatchInfo); //save new matchInfo to Firebase
+                    saveDataLocal(newMatchInfo); //save matchInfoList Locally
 
-                    saveData(); //save matchInfoList to shared preferences
-
-                    Toast.makeText(ScoutActivity.this, "Successful Submit- Match:"+lstResponse.match+" Team: "+lstResponse.team, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ScoutActivity.this, "Successful Submit- Match: "+newMatchInfo.match+" Team: "+newMatchInfo.team, Toast.LENGTH_SHORT).show();
                 }
             }
         }
         );
     }
 
-    public void saveData(){
+    public void saveDataLocal(MatchInfo matchInfo){
+        //Append new MatchInfo Object to array
+        matchInfoList.add(matchInfo);
+        Log.v("ScoutActivity", "Submitted Data. Match: "+matchInfo.match+" Team: "+matchInfo.team);
+        Intent submitMatchInfos = new Intent(ScoutActivity.this, MenuActivity.class);
+        startActivity(submitMatchInfos);
+
+        //Update the array of matchInfo objects stored in sharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
