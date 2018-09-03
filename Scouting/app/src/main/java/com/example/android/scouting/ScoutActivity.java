@@ -14,6 +14,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
@@ -59,29 +62,15 @@ public class ScoutActivity extends BaseActivity {
 
                     MatchInfo newMatchInfo = new MatchInfo(tournament, match, team, haveAuto, notes);
                     sMatchRef.push().setValue(newMatchInfo); //save new matchInfo to Firebase
-                    saveDataLocal(newMatchInfo); //save matchInfoList Locally
-
+                    //Exit to menu
+                    Intent submitMatchInfos = new Intent(ScoutActivity.this, MenuActivity.class);
+                    startActivity(submitMatchInfos);
+                    //Toast
                     Toast.makeText(ScoutActivity.this, "Successful Submit- Match: "+newMatchInfo.match+" Team: "+newMatchInfo.team, Toast.LENGTH_SHORT).show();
                 }
             }
         }
         );
-    }
-
-    public void saveDataLocal(MatchInfo matchInfo){
-        //Append new MatchInfo Object to array
-        matchInfoList.add(matchInfo);
-        Log.v("ScoutActivity", "Submitted Data. Match: "+matchInfo.match+" Team: "+matchInfo.team);
-        Intent submitMatchInfos = new Intent(ScoutActivity.this, MenuActivity.class);
-        startActivity(submitMatchInfos);
-
-        //Update the array of matchInfo objects stored in sharedPreferences
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(matchInfoList);
-        editor.putString(SHARED_PREFS_KEY, json);
-        editor.apply();
     }
 
     private boolean isEmpty(int id)

@@ -15,7 +15,7 @@ import static com.example.android.scouting.MenuActivity.SHARED_PREFS_KEY;
 import static com.example.android.scouting.MenuActivity.matchInfoList;
 
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends BaseActivity {
     public static String userName;
     public static String teamNum;
     public static boolean eraseData;
@@ -62,6 +62,7 @@ public class SettingsActivity extends AppCompatActivity {
         Log.v("SettingsActivity", "Filter Settings. teamFilter: "+teamFilter+" tournamentFilter: "+tournamentFilter);
         if (eraseData)
         {
+            setMatchKey("empty");
             Log.v("SettingsActivity", "Erase Data");
             SharedPreferences arrSharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
             arrSharedPreferences.edit().remove(SHARED_PREFS_KEY).apply();

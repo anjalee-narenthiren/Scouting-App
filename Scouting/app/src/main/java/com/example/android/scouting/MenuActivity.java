@@ -16,10 +16,6 @@ import java.util.ArrayList;
 
 public class MenuActivity extends BaseActivity {
 
-    public final static String SHARED_PREFS_KEY = "match list";
-    public static ArrayList<MatchInfo> matchInfoList;
-    public static ArrayList<MatchInfo> matchInfoFilteredList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,17 +47,6 @@ public class MenuActivity extends BaseActivity {
             }
         });
 
-    }
-
-    public void loadData(){
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString(SHARED_PREFS_KEY, null);
-        Type type = new TypeToken<ArrayList<MatchInfo>>() {}.getType();
-        matchInfoList = gson.fromJson(json, type);
-
-        if (matchInfoList == null)
-            matchInfoList = new ArrayList<MatchInfo>();
     }
 
 

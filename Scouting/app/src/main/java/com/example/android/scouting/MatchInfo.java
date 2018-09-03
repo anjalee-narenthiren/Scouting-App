@@ -5,8 +5,11 @@ public class MatchInfo {
     public boolean haveAuto;
     public String tournament, otherNotes;
 
-    MatchInfo(String tournamentIn, int matchIn, int teamIn, boolean haveAutoIn, String otherNotesIn)
-    {
+    public MatchInfo() {
+
+    }
+
+    public MatchInfo(String tournamentIn, int matchIn, int teamIn, boolean haveAutoIn, String otherNotesIn) {
         tournament = tournamentIn;
         match=matchIn;
         team=teamIn;

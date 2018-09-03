@@ -11,7 +11,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.kelin.scrollablepanel.library.ScrollablePanel;
 
 import java.text.SimpleDateFormat;
@@ -32,6 +37,34 @@ public class ViewDataActivity extends BaseActivity implements SharedPreferences.
 
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
 
+        sMatchRef.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                Toast.makeText(ViewDataActivity.this, "Refresh "+getMatchKey(), Toast.LENGTH_SHORT).show();
+                                                Log.v("ViewDataActivity", "Refresh "+getMatchKey());
+                                                boolean appendMatch;
+                                                if (getMatchKey().equals("empty")||matchInfoList.isEmpty())
+                                                    appendMatch = true;
+                                                else
+                                                    appendMatch = false;
+
+                                                for (DataSnapshot matchSnapshot : dataSnapshot.getChildren()){
+                                                    if (appendMatch) {
+                                                        MatchInfo matchObject = matchSnapshot.getValue(MatchInfo.class);
+                                                        saveDataLocal(matchObject);
+                                                        updateDataView();
+                                                        setMatchKey(matchSnapshot.getKey()); //Store last grabbed key
+                                                    }
+                                                    else if (matchSnapshot.getKey() == getMatchKey())
+                                                        appendMatch = true;
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+                                                Toast.makeText(ViewDataActivity.this, "Failed to fetch new data", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
         updateDataView();
     }
 
