@@ -42,6 +42,9 @@ public class BaseActivity extends AppCompatActivity {
         sDatabase = FirebaseDatabase.getInstance();
         sMatchRef = sDatabase.getReference().child("match");
         sDeletedMatchRef = sDatabase.getReference().child("deleted_match");
+
+        if (matchInfoList.isEmpty())
+            setMatchKey("empty");
     }
 
     //Implement Menu

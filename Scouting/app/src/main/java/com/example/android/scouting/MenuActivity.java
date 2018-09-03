@@ -18,10 +18,10 @@ public class MenuActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        loadData(); //update the matchInfoList
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
-        loadData(); //update the matchInfoList
 
         Button scout_bttn = findViewById(R.id.scout_bttn);
         scout_bttn.setOnClickListener(new View.OnClickListener()

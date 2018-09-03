@@ -1,7 +1,10 @@
 package com.example.android.scouting;
 
 import android.content.SharedPreferences;
+import android.preference.EditTextPreference;
+import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.support.v14.preference.PreferenceFragment;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +18,7 @@ import static com.example.android.scouting.MenuActivity.SHARED_PREFS_KEY;
 import static com.example.android.scouting.MenuActivity.matchInfoList;
 
 
-public class SettingsActivity extends BaseActivity {
+public class SettingsActivity extends AppCompatActivity {
     public static String myUserName;
     public static String teamNum;
     public static boolean eraseData;
@@ -24,7 +27,7 @@ public class SettingsActivity extends BaseActivity {
     public static String tournamentFilter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         ActionBar actionBar = this.getSupportActionBar();
@@ -33,6 +36,7 @@ public class SettingsActivity extends BaseActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
     }
 
     @Override
@@ -41,7 +45,7 @@ public class SettingsActivity extends BaseActivity {
         // When the home button is pressed, take the user back to the PreviousActivity
         switch (item.getItemId()) {
             case android.R.id.home:
-                updateVariables();
+                updateSettingsVariables();
                 finish();
                 return true;
             default:
@@ -49,7 +53,7 @@ public class SettingsActivity extends BaseActivity {
         }
     }
 
-    public void updateVariables() {
+    public void updateSettingsVariables() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         myUserName = sharedPreferences.getString("user_name", "Aiden");
         teamNum = sharedPreferences.getString("team_num", "5225");
@@ -62,7 +66,6 @@ public class SettingsActivity extends BaseActivity {
         Log.v("SettingsActivity", "Filter Settings. teamFilter: "+teamFilter+" tournamentFilter: "+tournamentFilter);
         if (eraseData)
         {
-            setMatchKey("empty");
             Log.v("SettingsActivity", "Erase Data");
             SharedPreferences arrSharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
             arrSharedPreferences.edit().remove(SHARED_PREFS_KEY).apply();

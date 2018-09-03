@@ -29,6 +29,7 @@
     <EditTextPreference
         android:title="Team Filter"
         android:key="team_filter"
+        android:inputType="number"
         android:defaultValue=" "
         android:persistent="true" />
     <EditTextPreference

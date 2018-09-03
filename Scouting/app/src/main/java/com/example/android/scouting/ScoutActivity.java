@@ -68,7 +68,7 @@ public class ScoutActivity extends BaseActivity {
                     Intent submitMatchInfos = new Intent(ScoutActivity.this, MenuActivity.class);
                     startActivity(submitMatchInfos);
                     //Toast
-                    Toast.makeText(ScoutActivity.this, "Successful Submit- Match: "+newMatchInfo.match+" Team: "+newMatchInfo.team, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ScoutActivity.this, "Successful Submit Match: "+newMatchInfo.match+" Team: "+newMatchInfo.team, Toast.LENGTH_SHORT).show();
                 }
             }
         }
