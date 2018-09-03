@@ -61,7 +61,7 @@ public class ScoutActivity extends BaseActivity {
                     boolean haveAuto = ((CheckBox)findViewById(R.id.scout_auto_cb)).isChecked();
                     String notes = ETToString(R.id.scout_notes_et);
 
-                    MatchInfo newMatchInfo = new MatchInfo(tournament, match, team, haveAuto, notes, myUserName);
+                    MatchInfo newMatchInfo = new MatchInfo(tournament, match, team, haveAuto, notes, myUserName, getMyIp());
                     saveDataLocal(newMatchInfo); //add newMatchInfo object to local array
                     sMatchRef.push().setValue(newMatchInfo); //save newMatchInfo to Firebase
                     //Exit to menu

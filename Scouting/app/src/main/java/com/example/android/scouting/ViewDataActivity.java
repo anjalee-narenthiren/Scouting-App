@@ -42,7 +42,7 @@ public class ViewDataActivity extends BaseActivity implements SharedPreferences.
                                             @Override
                                             public void onDataChange(DataSnapshot dataSnapshot) {
                                                 Toast.makeText(ViewDataActivity.this, "Refresh "+getMatchKey(), Toast.LENGTH_SHORT).show();
-                                                Log.v("ViewDataActivity", "Refresh "+getMatchKey());
+                                                Log.v("ViewDataActivity", "Refresh. LstKey: "+getMatchKey());
                                                 boolean appendMatch;
                                                 if (getMatchKey().equals("empty")||matchInfoList.isEmpty())
                                                     appendMatch = true;
@@ -53,8 +53,8 @@ public class ViewDataActivity extends BaseActivity implements SharedPreferences.
                                                     for (DataSnapshot matchSnapshot : dataSnapshot.getChildren()) {
                                                         if (appendMatch) {
                                                             MatchInfo matchObject = matchSnapshot.getValue(MatchInfo.class);
-                                                            if (!matchObject.userName.equals(myUserName)) {
-                                                                Log.v("ViewDataActivity","Syncing. name:"+matchObject.userName+"myName:"+myUserName);
+                                                            if (!matchObject.deviceIp.equals(getMyIp())) {
+                                                                Log.v("ViewDataActivity","Syncing. otherIp:"+matchObject.deviceIp+"myIp:"+getMyIp());
                                                                 //Toast.makeText(ViewDataActivity.this, "Syncing. name:"+matchObject.userName+"myName:"+myUserName, Toast.LENGTH_SHORT).show();
                                                                 saveDataLocal(matchObject);
                                                                 updateDataView();

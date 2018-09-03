@@ -7,11 +7,13 @@ public class MatchInfo {
 
     public String userName;
 
+    public String deviceIp;
+
     public MatchInfo() {
 
     }
 
-    public MatchInfo(String tournamentIn, int matchIn, int teamIn, boolean haveAutoIn, String otherNotesIn, String nameIn) {
+    public MatchInfo(String tournamentIn, int matchIn, int teamIn, boolean haveAutoIn, String otherNotesIn, String nameIn, String deviceIpIn) {
         tournament = tournamentIn;
         match=matchIn;
         team=teamIn;
@@ -19,5 +21,7 @@ public class MatchInfo {
         otherNotes=otherNotesIn;
 
         userName = nameIn;
+
+        deviceIp = deviceIpIn;
     }
 }

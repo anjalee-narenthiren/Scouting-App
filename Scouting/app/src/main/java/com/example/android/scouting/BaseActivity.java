@@ -2,13 +2,16 @@ package com.example.android.scouting;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
@@ -25,10 +28,12 @@ import static com.example.android.scouting.MenuActivity.matchInfoList;
 public class BaseActivity extends AppCompatActivity {
     public final static String SHARED_PREFS_KEY = "match_list";
     public final static String SHARED_PREFS_FIREBASE_KEY = "firebase_key";
+    public final static String SHARED_PREFS_IP_KEY = "ip_key";
     public static ArrayList<MatchInfo> matchInfoList;
     public static ArrayList<MatchInfo> matchInfoFilteredList;
 
     //Set up databse variables
+    public static String sIpAddress;
     private static String sMatchKey;
     public static FirebaseDatabase sDatabase;
     public static DatabaseReference sMatchRef;
@@ -38,6 +43,8 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getMyIp();
 
         sDatabase = FirebaseDatabase.getInstance();
         sMatchRef = sDatabase.getReference().child("match");
@@ -106,5 +113,25 @@ public class BaseActivity extends AppCompatActivity {
             sMatchKey = "empty";
 
         return sMatchKey;
+    }
+
+
+    public String getMyIp() {
+        //Only updates the sIpAddress variable IF it is null - only does it once
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        sIpAddress = sharedPreferences.getString(SHARED_PREFS_IP_KEY, null);
+
+        if (sIpAddress == null) {
+            WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+            sIpAddress = Formatter.formatIpAddress(wifiManager.getConnectionInfo().getIpAddress());
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(SHARED_PREFS_IP_KEY, sIpAddress);
+            editor.apply();
+
+            Toast.makeText(this, "Set IP:"+sIpAddress, Toast.LENGTH_SHORT).show();
+        }
+
+        return sIpAddress;
     }
 }
