@@ -102,6 +102,7 @@ public class ViewDataActivity extends BaseActivity implements SharedPreferences.
         descriptionInfoList.add("Team");
         descriptionInfoList.add("Auto");
         descriptionInfoList.add("Notes");
+        descriptionInfoList.add("Author");
         scrollablePanelAdapter.setDescriptionInfoList(descriptionInfoList);
 
         Calendar calendar = Calendar.getInstance();

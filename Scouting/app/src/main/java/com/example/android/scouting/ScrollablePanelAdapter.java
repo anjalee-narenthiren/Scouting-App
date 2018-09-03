@@ -113,9 +113,12 @@ public class ScrollablePanelAdapter extends PanelAdapter {
                 case 4:
                     val = matchInfo.otherNotes;
                     break;
+                case 5:
+                    val = matchInfo.userName;
+                    break;
                 default:
-                    val = matchInfo.tournament;
-
+                    val = "-";
+                    break;
             }
             viewHolder.matchTextView.setText(val);
         }
