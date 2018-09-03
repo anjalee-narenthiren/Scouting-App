@@ -16,7 +16,7 @@ import static com.example.android.scouting.MenuActivity.matchInfoList;
 
 
 public class SettingsActivity extends BaseActivity {
-    public static String userName;
+    public static String myUserName;
     public static String teamNum;
     public static boolean eraseData;
 
@@ -51,14 +51,14 @@ public class SettingsActivity extends BaseActivity {
 
     public void updateVariables() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        userName = sharedPreferences.getString("user_name", "Aiden");
+        myUserName = sharedPreferences.getString("user_name", "Aiden");
         teamNum = sharedPreferences.getString("team_num", "5225");
         eraseData = sharedPreferences.getBoolean("erase_data", false);
 
         teamFilter = sharedPreferences.getString("team_filter", "").trim();
         tournamentFilter = sharedPreferences.getString("tournament_filter", "").trim();
 
-        Log.v("SettingsActivity", "General Settings. User: "+userName+" Team: "+teamNum+" Erase Data? "+eraseData);
+        Log.v("SettingsActivity", "General Settings. User: "+myUserName+" Team: "+teamNum+" Erase Data? "+eraseData);
         Log.v("SettingsActivity", "Filter Settings. teamFilter: "+teamFilter+" tournamentFilter: "+tournamentFilter);
         if (eraseData)
         {
@@ -74,6 +74,6 @@ public class SettingsActivity extends BaseActivity {
             editor.putBoolean("erase_data", false).commit();
             eraseData = false;
         }
-        Log.v("SettingsActivity", "User:" + userName + " Team:" + teamNum);
+        Log.v("SettingsActivity", "User:" + myUserName + " Team:" + teamNum);
     }
 }

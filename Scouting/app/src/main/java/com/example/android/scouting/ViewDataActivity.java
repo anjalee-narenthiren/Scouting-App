@@ -26,6 +26,7 @@ import java.util.List;
 
 import static com.example.android.scouting.MenuActivity.matchInfoList;
 import static com.example.android.scouting.MenuActivity.matchInfoFilteredList;
+import static com.example.android.scouting.SettingsActivity.myUserName;
 import static com.example.android.scouting.SettingsActivity.teamFilter;
 import static com.example.android.scouting.SettingsActivity.tournamentFilter;
 
@@ -48,21 +49,29 @@ public class ViewDataActivity extends BaseActivity implements SharedPreferences.
                                                 else
                                                     appendMatch = false;
 
-                                                for (DataSnapshot matchSnapshot : dataSnapshot.getChildren()){
-                                                    if (appendMatch) {
-                                                        MatchInfo matchObject = matchSnapshot.getValue(MatchInfo.class);
-                                                        saveDataLocal(matchObject);
-                                                        updateDataView();
-                                                        setMatchKey(matchSnapshot.getKey()); //Store last grabbed key
+                                                try {
+                                                    for (DataSnapshot matchSnapshot : dataSnapshot.getChildren()) {
+                                                        if (appendMatch) {
+                                                            MatchInfo matchObject = matchSnapshot.getValue(MatchInfo.class);
+                                                            if (!matchObject.userName.equals(myUserName)) {
+                                                                Log.v("ViewDataActivity","Syncing. name:"+matchObject.userName+"myName:"+myUserName);
+                                                                //Toast.makeText(ViewDataActivity.this, "Syncing. name:"+matchObject.userName+"myName:"+myUserName, Toast.LENGTH_SHORT).show();
+                                                                saveDataLocal(matchObject);
+                                                                updateDataView();
+                                                                setMatchKey(matchSnapshot.getKey()); //Store last grabbed key
+                                                            }
+                                                        } else if (matchSnapshot.getKey() == getMatchKey())
+                                                            appendMatch = true;
                                                     }
-                                                    else if (matchSnapshot.getKey() == getMatchKey())
-                                                        appendMatch = true;
+                                                } catch(Exception e)
+                                                {
+                                                    Toast.makeText(ViewDataActivity.this, "Sync Failed - Exception", Toast.LENGTH_SHORT).show();
                                                 }
                                             }
 
                                             @Override
                                             public void onCancelled(DatabaseError databaseError) {
-                                                Toast.makeText(ViewDataActivity.this, "Failed to fetch new data", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ViewDataActivity.this, "Sync Cancelled", Toast.LENGTH_SHORT).show();
                                             }
                                         });
         updateDataView();

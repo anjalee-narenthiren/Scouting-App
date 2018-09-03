@@ -26,6 +26,7 @@ import java.util.Calendar;
 import static com.example.android.scouting.MenuActivity.SHARED_PREFS_KEY;
 import static com.example.android.scouting.MenuActivity.matchInfoList;
 
+import static com.example.android.scouting.SettingsActivity.myUserName;
 import static java.lang.Integer.parseInt;
 
 public class ScoutActivity extends BaseActivity {
@@ -60,8 +61,9 @@ public class ScoutActivity extends BaseActivity {
                     boolean haveAuto = ((CheckBox)findViewById(R.id.scout_auto_cb)).isChecked();
                     String notes = ETToString(R.id.scout_notes_et);
 
-                    MatchInfo newMatchInfo = new MatchInfo(tournament, match, team, haveAuto, notes);
-                    sMatchRef.push().setValue(newMatchInfo); //save new matchInfo to Firebase
+                    MatchInfo newMatchInfo = new MatchInfo(tournament, match, team, haveAuto, notes, myUserName);
+                    saveDataLocal(newMatchInfo); //add newMatchInfo object to local array
+                    sMatchRef.push().setValue(newMatchInfo); //save newMatchInfo to Firebase
                     //Exit to menu
                     Intent submitMatchInfos = new Intent(ScoutActivity.this, MenuActivity.class);
                     startActivity(submitMatchInfos);
