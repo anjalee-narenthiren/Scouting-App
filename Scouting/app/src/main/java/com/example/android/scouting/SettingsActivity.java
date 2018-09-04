@@ -12,6 +12,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.auth.api.Auth;
+
 import java.util.ArrayList;
 
 import static com.example.android.scouting.MenuActivity.SHARED_PREFS_KEY;
@@ -20,8 +23,8 @@ import static com.example.android.scouting.MenuActivity.matchInfoList;
 
 public class SettingsActivity extends AppCompatActivity {
     public static String sUserName;
-    public static String teamNum;
-    public static boolean eraseData;
+    public static String sTeamNum;
+    public static boolean sEraseData, sSignOut;
 
     public static String teamFilter;
     public static String tournamentFilter;
@@ -56,16 +59,16 @@ public class SettingsActivity extends AppCompatActivity {
     public void updateSettingsVariables() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         //sUserName = sharedPreferences.getString("user_name", "Aiden");
-        //teamNum = sharedPreferences.getString("team_num", "5225");
-        eraseData = sharedPreferences.getBoolean("erase_data", false);
+        //sTeamNum = sharedPreferences.getString("team_num", "5225");
+        sSignOut = sharedPreferences.getBoolean("sign_out", false);
+        sEraseData = sharedPreferences.getBoolean("erase_data", false);
 
         teamFilter = sharedPreferences.getString("team_filter", "").trim();
         tournamentFilter = sharedPreferences.getString("tournament_filter", "").trim();
 
-        Log.v("SettingsActivity", "General Settings. User: "+sUserName+" Team: "+teamNum+" Erase Data? "+eraseData);
+        Log.v("SettingsActivity", "General Settings. User: "+sUserName+" Team: "+sTeamNum+" Erase Data? "+sEraseData);
         Log.v("SettingsActivity", "Filter Settings. teamFilter: "+teamFilter+" tournamentFilter: "+tournamentFilter);
-        if (eraseData)
-        {
+        if (sEraseData) {
             Log.v("SettingsActivity", "Erase Data");
             SharedPreferences arrSharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
             arrSharedPreferences.edit().remove(SHARED_PREFS_KEY).apply();
@@ -75,8 +78,16 @@ public class SettingsActivity extends AppCompatActivity {
 
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("erase_data", false).commit();
-            eraseData = false;
+            sEraseData = false;
         }
-        Log.v("SettingsActivity", "User:" + sUserName + " Team:" + teamNum);
+        if (sSignOut) {
+            Log.v("SettingsActivity", "Sign out");
+            AuthUI.getInstance().signOut(this);
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("sign_out", false).commit();
+            sSignOut = false;
+        }
+        Log.v("SettingsActivity", "User:" + sUserName + " Team:" + sTeamNum);
     }
 }

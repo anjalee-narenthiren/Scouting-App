@@ -17,12 +17,15 @@
         android:inputType="number"
         android:persistent="true" />
         -->
+    <CheckBoxPreference
+        android:title="Sign Out"
+        android:key="sign_out"
+        android:defaultValue="false" />
     <SwitchPreference
         android:title="Erase Local Scouting Data"
         android:key="erase_data"
         android:defaultValue="false"
-        android:summary="CAUTION!!! YOU DIE IF YOU PRESS THIS!"
-        />
+        android:summary="CAUTION!!! YOU DIE IF YOU PRESS THIS!" />
     <!-- //////////////////////////////////Search Filters////////////////////////////// -->
     <PreferenceCategory
         android:title="Search Filters"
