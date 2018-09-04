@@ -122,14 +122,24 @@ public class BaseActivity extends AppCompatActivity {
         sIpAddress = sharedPreferences.getString(SHARED_PREFS_IP_KEY, null);
 
         if (sIpAddress == null) {
-            WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
-            sIpAddress = Formatter.formatIpAddress(wifiManager.getConnectionInfo().getIpAddress());
+            try {
+                WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+                sIpAddress = Formatter.formatIpAddress(wifiManager.getConnectionInfo().getIpAddress());
 
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(SHARED_PREFS_IP_KEY, sIpAddress);
-            editor.apply();
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(SHARED_PREFS_IP_KEY, sIpAddress);
+                editor.apply();
 
-            Toast.makeText(this, "Set IP:"+sIpAddress, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Set IP:" + sIpAddress, Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                Log.e("BaseActivity", "Set IP failed:");
+                Toast.makeText(this, "Set IP failed:", Toast.LENGTH_SHORT).show();
+
+                sIpAddress = null;
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(SHARED_PREFS_IP_KEY, sIpAddress);
+                editor.apply();
+            }
         }
 
         return sIpAddress;

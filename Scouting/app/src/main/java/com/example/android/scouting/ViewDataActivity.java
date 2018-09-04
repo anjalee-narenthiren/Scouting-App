@@ -26,7 +26,7 @@ import java.util.List;
 
 import static com.example.android.scouting.MenuActivity.matchInfoList;
 import static com.example.android.scouting.MenuActivity.matchInfoFilteredList;
-import static com.example.android.scouting.SettingsActivity.myUserName;
+import static com.example.android.scouting.SettingsActivity.sUserName;
 import static com.example.android.scouting.SettingsActivity.teamFilter;
 import static com.example.android.scouting.SettingsActivity.tournamentFilter;
 
@@ -55,7 +55,7 @@ public class ViewDataActivity extends BaseActivity implements SharedPreferences.
                                                             MatchInfo matchObject = matchSnapshot.getValue(MatchInfo.class);
                                                             if (!matchObject.deviceIp.equals(getMyIp())) {
                                                                 Log.v("ViewDataActivity","Syncing. otherIp:"+matchObject.deviceIp+"myIp:"+getMyIp());
-                                                                //Toast.makeText(ViewDataActivity.this, "Syncing. name:"+matchObject.userName+"myName:"+myUserName, Toast.LENGTH_SHORT).show();
+                                                                //Toast.makeText(ViewDataActivity.this, "Syncing. name:"+matchObject.userName+"myName:"+sUserName, Toast.LENGTH_SHORT).show();
                                                                 saveDataLocal(matchObject);
                                                                 updateDataView();
                                                                 setMatchKey(matchSnapshot.getKey()); //Store last grabbed key

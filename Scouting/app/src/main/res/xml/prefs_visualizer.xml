@@ -3,6 +3,7 @@
     <PreferenceCategory
         android:title="General Settings"
         android:enabled="true" />
+    <!--
     <EditTextPreference
         android:title="Your Name"
         android:key="user_name"
@@ -15,6 +16,7 @@
         android:defaultValue="5225"
         android:inputType="number"
         android:persistent="true" />
+        -->
     <SwitchPreference
         android:title="Erase Local Scouting Data"
         android:key="erase_data"

@@ -19,7 +19,7 @@ import static com.example.android.scouting.MenuActivity.matchInfoList;
 
 
 public class SettingsActivity extends AppCompatActivity {
-    public static String myUserName;
+    public static String sUserName;
     public static String teamNum;
     public static boolean eraseData;
 
@@ -55,14 +55,14 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void updateSettingsVariables() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        myUserName = sharedPreferences.getString("user_name", "Aiden");
-        teamNum = sharedPreferences.getString("team_num", "5225");
+        //sUserName = sharedPreferences.getString("user_name", "Aiden");
+        //teamNum = sharedPreferences.getString("team_num", "5225");
         eraseData = sharedPreferences.getBoolean("erase_data", false);
 
         teamFilter = sharedPreferences.getString("team_filter", "").trim();
         tournamentFilter = sharedPreferences.getString("tournament_filter", "").trim();
 
-        Log.v("SettingsActivity", "General Settings. User: "+myUserName+" Team: "+teamNum+" Erase Data? "+eraseData);
+        Log.v("SettingsActivity", "General Settings. User: "+sUserName+" Team: "+teamNum+" Erase Data? "+eraseData);
         Log.v("SettingsActivity", "Filter Settings. teamFilter: "+teamFilter+" tournamentFilter: "+tournamentFilter);
         if (eraseData)
         {
@@ -77,6 +77,6 @@ public class SettingsActivity extends AppCompatActivity {
             editor.putBoolean("erase_data", false).commit();
             eraseData = false;
         }
-        Log.v("SettingsActivity", "User:" + myUserName + " Team:" + teamNum);
+        Log.v("SettingsActivity", "User:" + sUserName + " Team:" + teamNum);
     }
 }
