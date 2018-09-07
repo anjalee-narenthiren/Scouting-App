@@ -14,9 +14,12 @@ import android.view.MenuItem;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.auth.api.Auth;
+import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
 
+import static com.example.android.scouting.BaseActivity.sDatabase;
+import static com.example.android.scouting.BaseActivity.sMatchRef;
 import static com.example.android.scouting.MenuActivity.SHARED_PREFS_KEY;
 import static com.example.android.scouting.MenuActivity.matchInfoList;
 
@@ -24,7 +27,7 @@ import static com.example.android.scouting.MenuActivity.matchInfoList;
 public class SettingsActivity extends AppCompatActivity {
     public static String sUserName;
     public static String sTeamNum;
-    public static boolean sEraseData, sSignOut;
+    public static boolean sEraseData, sResyncData, sSignOut;
 
     public static String teamFilter;
     public static String tournamentFilter;
@@ -62,6 +65,7 @@ public class SettingsActivity extends AppCompatActivity {
         //sTeamNum = sharedPreferences.getString("team_num", "5225");
         sSignOut = sharedPreferences.getBoolean("sign_out", false);
         sEraseData = sharedPreferences.getBoolean("erase_data", false);
+        sResyncData = sharedPreferences.getBoolean("resync_data", false);
 
         teamFilter = sharedPreferences.getString("team_filter", "").trim();
         tournamentFilter = sharedPreferences.getString("tournament_filter", "").trim();
@@ -87,6 +91,14 @@ public class SettingsActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("sign_out", false).commit();
             sSignOut = false;
+        }
+        if (sResyncData) {
+            DataSnapshot dataSnapshot = sDatabase.getReference().;
+
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("resync_data", false).commit();
+            sResyncData = false;
         }
         Log.v("SettingsActivity", "User:" + sUserName + " Team:" + sTeamNum);
     }

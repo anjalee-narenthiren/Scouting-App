@@ -22,6 +22,10 @@
         android:key="sign_out"
         android:defaultValue="false" />
     <SwitchPreference
+        android:title="Re-Sync Data"
+        android:key="resync_data"
+        android:defaultValue="false" />
+    <SwitchPreference
         android:title="Erase Local Scouting Data"
         android:key="erase_data"
         android:defaultValue="false"
